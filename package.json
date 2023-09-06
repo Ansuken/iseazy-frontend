@@ -3,31 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^6.1.2",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
     "animate.css": "^4.1.1",
-    "firebase": "^10.1.0",
+    "jsdom": "^22.1.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
-    "react": "^18.2.0"
+    "vitest": "^0.34.3"
   },
   "devDependencies": {
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
-    "@types/jest": "^29.5.4",
-    "@types/node": "^20.5.9",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.0",
+    "@vitejs/plugin-react": "^4.0.4",
+    "@vitest/ui": "^0.34.3",
+    "firebase": "^10.1.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9"
   },
   "scripts": {
     "dev": "vite",
-    "start": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest --ui"
   },
   "browserslist": {
     "production": [
