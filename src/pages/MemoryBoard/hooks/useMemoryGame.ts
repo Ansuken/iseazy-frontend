@@ -4,8 +4,8 @@ import { useCards, useMatches } from ".";
 
 export const useMemoryGame = () => {
     const { cardsQuery } = useCards();
-    const [cards, setCards] = useState<Card[]>(cardsQuery.data || []);
-    const {selectedCards, setSelectedCards, timer, isGameOver, totalMovements} = useMatches(cards);
+    const [cards, setCards] = useState<Card[]>([]);
+    const {selectedCards, setSelectedCards, timer, isGameOver, totalAttempts} = useMatches(cards);
     
     useEffect(() => {
         setCards(cardsQuery.data || []);
@@ -23,6 +23,6 @@ export const useMemoryGame = () => {
         handleClick,
         isGameOver,
         timer,
-        totalMovements
+        totalAttempts
     }
 }
