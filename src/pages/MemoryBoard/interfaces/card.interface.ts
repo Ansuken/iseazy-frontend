@@ -1,7 +1,7 @@
 export interface Card {
-    id: number;
+    id: string;
     content: string;
     cardPairID: number;
     flipped: boolean;
-    revealed: boolean;
+    revealed?: boolean;
 }

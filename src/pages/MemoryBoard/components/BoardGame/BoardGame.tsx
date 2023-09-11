@@ -10,7 +10,7 @@ export const BoardGame: FC = () => {
     const { cards, isGameOver, handleClick, timer, totalAttempts } = useMemoryGame();
     
     return (
-        <div className="board__wrap">
+        <div className="board__wrap" role="board">
             {
                 cards ? cards.map((card: CardProps, index: number) => (
                     <Card 
