@@ -1,18 +1,37 @@
-import { FC } from "react";
+import { useEffect, useState } from "react";
 import { Card } from ".."
-import { Card as CardProps} from "../../interfaces/card.interface";
 import { Modal } from '../../../../components';
-import { useMemoryGame } from "../../hooks";
 import { Spinner } from "../../../../components/Spinner";
+import { Card as CardProps } from "../../interfaces/card.interface";
+import { useCards } from "../../hooks";
+import { Game } from "../../../../helpers/gameClass";
 
-export const BoardGame: FC = () => {
+export const BoardGame = () => {
 
-    const { cards, isGameOver, handleClick, timer, totalAttempts } = useMemoryGame();
+    const { cardsQuery } = useCards();
+    const { startNewGame, handleCardClick, isMatched, gameState } = new Game();
+    const [ state, setState ] = useState(gameState);
+
+    useEffect(() => {
+        setState(startNewGame(cardsQuery.data || []));
+    }, [cardsQuery.data]);
+
+    const handleClick = ( card: CardProps ) => {
+        if ( !card.flipped && state.selectedCards.length < 2 ){
+            const newState = handleCardClick(state, card)
+            setState(newState);
+            if ( newState.selectedCards.length === 2 ) {
+                setTimeout(() => {
+                    setState(isMatched(newState));
+                }, 1000);
+            }
+        }
+    }
     
     return (
         <div className="board__wrap" role="board">
             {
-                cards ? cards.map((card: CardProps, index: number) => (
+                state.cards ? state.cards.map((card, index) => (
                     <Card 
                         key={card.id}
                         card={card}
@@ -22,7 +41,7 @@ export const BoardGame: FC = () => {
                 )) :
                 <Spinner />
             }
-            { isGameOver && <Modal timer={timer} attempts={totalAttempts}/> }
+            { state.isGameOver && <Modal timer={Math.floor((state.endTime - state.startTime) / 1000)} attempts={state.totalAttempts}/> }
         </div>
     )
 }
